@@ -263,18 +263,6 @@ export default function Home() {
           </div>
         </div>
 
-        {/* TRUSTED BY */}
-        <div className="trusted">
-          <span>BUILT FOR MODERN BUSINESSES</span>
-
-          <div className="trusted-logos">
-            <strong>Vertex</strong>
-            <strong>Northstar</strong>
-            <strong>Forma</strong>
-            <strong>Nova</strong>
-            <strong>Atlas</strong>
-          </div>
-        </div>
       </section>
 
       {/* FEATURES */}
