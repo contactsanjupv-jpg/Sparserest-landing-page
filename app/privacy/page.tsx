@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Privacy Policy — SparseReST",
@@ -12,13 +13,13 @@ export default function PrivacyPage() {
       <div className="mx-auto w-full max-w-4xl px-6 py-10 sm:px-8 sm:py-16">
         {/* Header */}
         <header className="mb-16">
-          <a href="/" className="mb-12 inline-flex -translate-x-12">
+          <Link href="/" className="mb-12 inline-flex -translate-x-12">
   <img
     src="/logo.png"
     alt="SparseReST logo"
     className="logo-image"
   />
-</a>
+</Link>
 
           <div className="max-w-3xl">
             <p className="mb-5 text-sm font-medium uppercase tracking-[0.16em] text-[#77736d]">
@@ -223,7 +224,7 @@ export default function PrivacyPage() {
 
           <section>
             <h2 className="text-2xl font-semibold tracking-[-0.02em]">
-              10. Children's Privacy
+              10. Children&apos;s Privacy
             </h2>
 
             <p className="mt-4 text-[15px] leading-7 text-[#5f5b55]">
@@ -295,12 +296,12 @@ export default function PrivacyPage() {
             <p>© {new Date().getFullYear()} SparseReST. All rights reserved.</p>
 
             <div className="flex items-center gap-6">
-              <a
+              <Link
                 href="/"
                 className="transition-colors hover:text-[#111111]"
               >
                 Home
-              </a>
+              </Link>
 
               <a
                 href="/privacy"
