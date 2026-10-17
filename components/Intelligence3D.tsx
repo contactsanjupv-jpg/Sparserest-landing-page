@@ -1,3 +1,4 @@
+
 "use client";
 
 import { Canvas, useFrame } from "@react-three/fiber";
@@ -18,81 +19,153 @@ type LandParticleData = {
   radius: number;
 };
 
-/**
- * The mask is source data only. White pixels represent land and black pixels
- * represent ocean. Accepted land samples are converted to real 3D sphere
- * coordinates; the image itself is never drawn in the scene.
- */
-function createLandParticleData(image: HTMLImageElement): LandParticleData {
+function createLandParticleData(
+  image: HTMLImageElement,
+): LandParticleData {
   const width = image.naturalWidth;
   const height = image.naturalHeight;
+
   const source = document.createElement("canvas");
   source.width = width;
   source.height = height;
 
-  const context = source.getContext("2d", { willReadFrequently: true });
-  if (!context) throw new Error("Could not read the continent mask canvas.");
+  const context = source.getContext("2d", {
+    willReadFrequently: true,
+  });
+
+  if (!context) {
+    throw new Error("Could not read the continent mask canvas.");
+  }
 
   context.drawImage(image, 0, 0, width, height);
-  const pixels = context.getImageData(0, 0, width, height).data;
+
+  const pixels = context.getImageData(
+    0,
+    0,
+    width,
+    height,
+  ).data;
+
   const isMobile = window.innerWidth <= 650;
   const radius = isMobile ? MOBILE_RADIUS : DESKTOP_RADIUS;
   const earthX = isMobile ? 1 : -1.05;
   const earthY = isMobile ? -2.6 : 0;
 
-  const positions = new Float32Array(LAND_PARTICLE_COUNT * 3);
+  const positions = new Float32Array(
+    LAND_PARTICLE_COUNT * 3,
+  );
+
   let count = 0;
   const maxAttempts = LAND_PARTICLE_COUNT * 18;
 
-  // Uniformly sample points on a sphere and reject points over the ocean.
+  // Uniformly distribute samples over a sphere, accepting
+  // only points that fall on land in the mask.
   for (
     let attempt = 0;
-    attempt < maxAttempts && count < LAND_PARTICLE_COUNT;
+    attempt < maxAttempts &&
+    count < LAND_PARTICLE_COUNT;
     attempt++
   ) {
     const sinLatitude = Math.random() * 2 - 1;
     const latitude = Math.asin(sinLatitude);
-    const longitude = (Math.random() * 2 - 1) * Math.PI;
+    const longitude =
+      (Math.random() * 2 - 1) * Math.PI;
 
     const px = Math.min(
       width - 1,
-      Math.floor(((longitude + Math.PI) / (Math.PI * 2)) * width),
+      Math.floor(
+        ((longitude + Math.PI) / (Math.PI * 2)) *
+          width,
+      ),
     );
+
     const py = Math.min(
       height - 1,
-      Math.floor(((Math.PI / 2 - latitude) / Math.PI) * height),
+      Math.floor(
+        ((Math.PI / 2 - latitude) / Math.PI) *
+          height,
+      ),
     );
+
     const pixel = (py * width + px) * 4;
 
-    // The alpha check also avoids sampling transparent areas as land.
-    if (pixels[pixel] < 180 || pixels[pixel + 3] < 128) continue;
+    if (
+      pixels[pixel] < 180 ||
+      pixels[pixel + 3] < 128
+    ) {
+      continue;
+    }
 
     const i3 = count * 3;
     const cosLatitude = Math.cos(latitude);
     const surfaceNoise = 0.985 + Math.random() * 0.03;
 
-    positions[i3] = cosLatitude * Math.sin(longitude) * radius * surfaceNoise;
-    positions[i3 + 1] = sinLatitude * radius * surfaceNoise;
-    positions[i3 + 2] = cosLatitude * Math.cos(longitude) * radius * surfaceNoise;
+    positions[i3] =
+      cosLatitude *
+      Math.sin(longitude) *
+      radius *
+      surfaceNoise;
+
+    positions[i3 + 1] =
+      sinLatitude * radius * surfaceNoise;
+
+    positions[i3 + 2] =
+      cosLatitude *
+      Math.cos(longitude) *
+      radius *
+      surfaceNoise;
+
     count++;
   }
 
   if (count < LAND_PARTICLE_COUNT * 0.8) {
-    throw new Error(`Land mask produced only ${count} land particles.`);
+    throw new Error(
+      `Land mask produced only ${count} land particles.`,
+    );
   }
 
   const geometry = new THREE.BufferGeometry();
+
   geometry.setAttribute(
     "position",
-    new THREE.BufferAttribute(positions.slice(0, count * 3), 3),
+    new THREE.BufferAttribute(
+      positions.slice(0, count * 3),
+      3,
+    ),
   );
 
-  return { geometry, earthX, earthY, radius };
+  return {
+    geometry,
+    earthX,
+    earthY,
+    radius,
+  };
 }
 
-function ParticleGlobe({ data }: { data: LandParticleData }) {
+function ParticleGlobe({
+  data,
+}: {
+  data: LandParticleData;
+}) {
   const groupRef = useRef<THREE.Group>(null);
   const reducedMotion = useRef(false);
+
+  // Far-side particles remain visible through the gaps
+  // between the front-side continent particles.
+  const farSideMaterial = useMemo(
+    () =>
+      new THREE.PointsMaterial({
+        color: "#85847d",
+        size: 0.009,
+        transparent: true,
+        opacity: 0.24,
+        sizeAttenuation: true,
+        depthTest: false,
+        depthWrite: false,
+        blending: THREE.NormalBlending,
+      }),
+    [],
+  );
 
   const crispMaterial = useMemo(
     () =>
@@ -102,6 +175,7 @@ function ParticleGlobe({ data }: { data: LandParticleData }) {
         transparent: true,
         opacity: 0.78,
         sizeAttenuation: true,
+        depthTest: true,
         depthWrite: false,
         blending: THREE.NormalBlending,
       }),
@@ -114,8 +188,9 @@ function ParticleGlobe({ data }: { data: LandParticleData }) {
         color: "#bcb9b1",
         size: 0.042,
         transparent: true,
-        opacity: 0.10,
+        opacity: 0.1,
         sizeAttenuation: true,
+        depthTest: true,
         depthWrite: false,
         blending: THREE.AdditiveBlending,
       }),
@@ -124,34 +199,48 @@ function ParticleGlobe({ data }: { data: LandParticleData }) {
 
   useEffect(() => {
     return () => {
-      data.geometry.dispose();
+      farSideMaterial.dispose();
       crispMaterial.dispose();
       glowMaterial.dispose();
     };
-  }, [data, crispMaterial, glowMaterial]);
+  }, [
+    farSideMaterial,
+    crispMaterial,
+    glowMaterial,
+  ]);
 
   useEffect(() => {
-    const media = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const media = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    );
+
     reducedMotion.current = media.matches;
 
-    const onChange = (event: MediaQueryListEvent) => {
+    const onChange = (
+      event: MediaQueryListEvent,
+    ) => {
       reducedMotion.current = event.matches;
     };
 
     media.addEventListener("change", onChange);
-    return () => media.removeEventListener("change", onChange);
+
+    return () =>
+      media.removeEventListener("change", onChange);
   }, []);
 
   useFrame((state, delta) => {
     const group = groupRef.current;
-    if (!group) return;
 
-    // The globe only rotates in place. There is no scroll-triggered breakup,
-    // particle explosion, debris field, or extra flow-particle system.
-    if (!reducedMotion.current) {
-      group.rotation.y += EARTH_SPIN_SPEED * delta;
-      group.rotation.x = 0.12 + Math.sin(state.clock.elapsedTime * 0.12) * 0.025;
+    if (!group || reducedMotion.current) {
+      return;
     }
+
+    group.rotation.y += EARTH_SPIN_SPEED * delta;
+
+    group.rotation.x =
+      0.12 +
+      Math.sin(state.clock.elapsedTime * 0.12) *
+        0.025;
   });
 
   return (
@@ -160,23 +249,23 @@ function ParticleGlobe({ data }: { data: LandParticleData }) {
       position={[data.earthX, data.earthY, 0]}
       rotation={[0.08, -0.72, 0]}
     >
-      {/* Invisible depth shell: hides far-side land particles without drawing water. */}
-      <mesh renderOrder={0}>
-        <sphereGeometry args={[data.radius * 0.94, 64, 48]} />
-        <meshBasicMaterial
-          colorWrite={false}
-          depthWrite
-          side={THREE.FrontSide}
-        />
-      </mesh>
+      {/* Faint particles on the far side of the globe. */}
+      <points
+        geometry={data.geometry}
+        material={farSideMaterial}
+        frustumCulled={false}
+        renderOrder={0}
+      />
 
-      {/* Land points are actual 3D positions on the rotating sphere. */}
+      {/* Soft glow on the visible surface. */}
       <points
         geometry={data.geometry}
         material={glowMaterial}
         frustumCulled={false}
         renderOrder={1}
       />
+
+      {/* Sharp front-side particles. */}
       <points
         geometry={data.geometry}
         material={crispMaterial}
@@ -188,37 +277,55 @@ function ParticleGlobe({ data }: { data: LandParticleData }) {
 }
 
 export default function Intelligence3D() {
-  const [landData, setLandData] = useState<LandParticleData | null>(null);
-  const [loadFailed, setLoadFailed] = useState(false);
+  const [landData, setLandData] =
+    useState<LandParticleData | null>(null);
+
+  const [loadFailed, setLoadFailed] =
+    useState(false);
 
   useEffect(() => {
     let cancelled = false;
+    let generatedData: LandParticleData | null = null;
+
     const image = new Image();
     image.decoding = "async";
     image.src = LAND_MASK_URL;
 
     image.onload = () => {
       if (cancelled) return;
+
       try {
-        setLandData(createLandParticleData(image));
+        generatedData = createLandParticleData(image);
+        setLandData(generatedData);
       } catch (error) {
-        console.error("[Intelligence3D] Failed to create continent particles.", error);
+        console.error(
+          "[Intelligence3D] Failed to create continent particles.",
+          error,
+        );
+
         setLoadFailed(true);
       }
     };
 
     image.onerror = () => {
       if (cancelled) return;
+
       console.error(
         `[Intelligence3D] Missing ${LAND_MASK_URL}. Add it at public/land-mask.png.`,
       );
+
       setLoadFailed(true);
     };
 
     return () => {
       cancelled = true;
+
       image.onload = null;
       image.onerror = null;
+
+      // Avoid leaking geometry if this component unmounts
+      // after generating data but before committing state.
+      generatedData?.geometry.dispose();
     };
   }, []);
 
@@ -227,14 +334,21 @@ export default function Intelligence3D() {
       className="intelligence-3d"
       role="img"
       aria-label="Three-dimensional globe formed from rotating particles across the continents"
-      data-globe-status={loadFailed ? "error" : landData ? "ready" : "loading"}
+      data-globe-status={
+        loadFailed
+          ? "error"
+          : landData
+            ? "ready"
+            : "loading"
+      }
     >
       <Canvas
         dpr={[1, 1.5]}
         camera={{
           position: [0, 0, 7.2],
           fov:
-            typeof window !== "undefined" && window.innerWidth <= 650
+            typeof window !== "undefined" &&
+            window.innerWidth <= 650
               ? 62
               : CAMERA_FOV,
           near: 0.1,
@@ -247,7 +361,10 @@ export default function Intelligence3D() {
         }}
       >
         <fog attach="fog" args={["#f5f3ef", 4, 13]} />
-        {landData ? <ParticleGlobe data={landData} /> : null}
+
+        {landData ? (
+          <ParticleGlobe data={landData} />
+        ) : null}
       </Canvas>
     </div>
   );

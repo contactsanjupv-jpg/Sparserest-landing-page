@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from "react";
 
 import Hero3D from "@/components/Hero3D";
 import Intelligence3D from "@/components/Intelligence3D";
+import PerformanceGraph from "@/components/PerformanceGraph";
 
 const integrations = [
   { icon: "↗", className: "icon-orange" },
@@ -292,45 +293,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="cta-section" id="contact">
-  <div className="cta-content">
-    <span className="section-label cta-label">
-      LET&apos;S BUILD
-    </span>
+      
+{/* CTA / PERFORMANCE GRAPH */}
+<section className="bottom-performance-section" id="contact">
+  <div className="bottom-performance-inner">
+    <div className="performance-intro-copy">
+      <span className="section-label">BUILT FOR CLARITY</span>
 
-    <h2>
-      Your next
-      <br />
-      advantage
-    </h2>
+      <h2>
+        Turning complex
+        <br />
+        systems into clear,
+        <br />
+        scalable solutions
+      </h2>
 
-    <p>
-      Tell us what you are trying to build, improve, or automate. We&apos;ll
-      figure out the technology with you
-    </p>
+      <p>
+        Each component is modular, reusable, and optimized for
+        real-world use cases. Teams can move faster while
+        maintaining consistency.
+      </p>
 
-    <div className="cta-buttons">
-      <a
-        href="mailto:contact@sparserest.com"
-        className="button cta-primary"
-      >
+      <a href="mailto:contact@sparserest.com" className="button cta-primary">
         Start a conversation
-        <span>→</span>
-      </a>
-
-      <a
-        href="#about"
-        className="button cta-secondary"
-      >
-        Back to top
+        <span aria-hidden="true">→</span>
       </a>
     </div>
-  </div>
 
-  <div className="cta-orb orb-one" />
-  <div className="cta-orb orb-two" />
+    <PerformanceGraph />
+  </div>
 </section>
+
 
 {/* FOOTER */}
 
