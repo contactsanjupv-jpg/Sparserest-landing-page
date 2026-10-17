@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Terms of Service — SparseReST",
@@ -12,7 +13,7 @@ export default function TermsPage() {
       <div className="mx-auto w-full max-w-4xl px-6 py-10 sm:px-8 sm:py-16">
         {/* Header */}
         <header className="mb-16">
-          <a
+          <Link
             href="/"
             className="mb-12 inline-flex -translate-x-12"
           >
@@ -21,7 +22,7 @@ export default function TermsPage() {
               alt="SparseReST logo"
               className="logo-image"
             />
-          </a>
+          </Link>
 
           <div className="max-w-3xl">
             <p className="mb-5 text-sm font-medium uppercase tracking-[0.16em] text-[#77736d]">
@@ -357,12 +358,12 @@ export default function TermsPage() {
             </p>
 
             <div className="flex items-center gap-6">
-              <a
+              <Link
                 href="/"
                 className="transition-colors hover:text-[#111111]"
               >
                 Home
-              </a>
+              </Link>
 
               <a
                 href="/privacy"
