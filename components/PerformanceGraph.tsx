@@ -62,9 +62,8 @@ export default function PerformanceGraph() {
         <div className="graph-card">
           <div className="graph-card-header">
             <div>
-              <p className="graph-title">Performance over time</p>
               <p className="graph-subtitle">
-                An illustrative upward trend
+                SparseReST
               </p>
             </div>
 
@@ -199,11 +198,6 @@ export default function PerformanceGraph() {
                 className="graph-marker-dot"
               />
             </svg>
-          </div>
-
-          <div className="graph-axis-labels">
-            <span>Earlier</span>
-            <span>Now</span>
           </div>
 
           <div className="graph-card-footer">
