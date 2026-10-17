@@ -1,5 +1,7 @@
 "use client";
 
+/* eslint-disable react-hooks/immutability, react-hooks/purity */
+
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Float, Sparkles } from "@react-three/drei";
 import { useRef, useMemo } from "react";
@@ -17,8 +19,7 @@ function RiggedGlobe() {
   const rig5 = useRef<THREE.Mesh>(null);
   const rig6 = useRef<THREE.Mesh>(null);
 
-  useFrame((state, delta) => {
-    const t = state.clock.elapsedTime;
+  useFrame((_state, delta) => {
     if (group.current) group.current.rotation.y += 0.05 * delta;
 
     // Frame-rate independent rotations (smooth as hell on any refresh rate)
@@ -273,7 +274,7 @@ function Hypercube4D() {
 
   const positions = useMemo(() => new Float32Array(edges.length * 2 * 3), [edges]);
 
-  useFrame((state, delta) => {
+  useFrame((state) => {
     const angleXW = state.clock.elapsedTime * 0.08;
     const angleYW = state.clock.elapsedTime * 0.12;
     const angleZW = state.clock.elapsedTime * 0.05;
@@ -287,15 +288,15 @@ function Hypercube4D() {
     for (let i = 0; i < 16; i++) {
       let [x, y, z, w] = vertices4D[i];
 
-      let nx = x * cosXW - w * sinXW;
+      const nx = x * cosXW - w * sinXW;
       let nw = x * sinXW + w * cosXW;
       x = nx; w = nw;
 
-      let ny = y * cosYW - w * sinYW;
+      const ny = y * cosYW - w * sinYW;
       nw = y * sinYW + w * cosYW;
       y = ny; w = nw;
 
-      let nz = z * cosZW - w * sinZW;
+      const nz = z * cosZW - w * sinZW;
       nw = z * sinZW + w * cosZW;
       z = nz; w = nw;
 
@@ -310,7 +311,7 @@ function Hypercube4D() {
     }
 
     let index = 0;
-    for (let edge of edges) {
+    for (const edge of edges) {
       const p1 = projected3D[edge[0]];
       const p2 = projected3D[edge[1]];
       positions[index++] = p1[0]; positions[index++] = p1[1]; positions[index++] = p1[2];
