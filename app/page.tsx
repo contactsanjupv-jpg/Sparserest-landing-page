@@ -34,32 +34,7 @@ const capabilities = [
   },
 ];
 
-const testimonials = [
-  {
-    initials: "AM",
-    name: "Alex Morgan",
-    role: "Business Owner",
-    text: "The difference is immediate. Our team spends less time dealing with repetitive tasks and more time actually running the business.",
-    className: "testimonial-light",
-    avatar: "avatar-a",
-  },
-  {
-    initials: "SM",
-    name: "Sarah Mitchell",
-    role: "Marketing Director",
-    text: "Everything feels connected now. The workflows are faster, cleaner, and much easier for our team to manage.",
-    className: "testimonial-dark",
-    avatar: "avatar-b",
-  },
-  {
-    initials: "JD",
-    name: "James Davis",
-    role: "Founder",
-    text: "We wanted something simple that could grow with us. The system has become a core part of how we operate.",
-    className: "testimonial-warm",
-    avatar: "avatar-c",
-  },
-];
+
 
 const featureTabs = [
   { icon: "✦", label: "Intelligent systems" },
@@ -70,7 +45,6 @@ const featureTabs = [
 
 export default function Home() {
   const [featureProgress, setFeatureProgress] = useState(0);
-  const [testimonialProgress, setTestimonialProgress] = useState(0);
 
   // Fills the bar under the feature tabs (and the text-fill effect on each
   // tab label) as that section scrolls into view.
@@ -114,79 +88,6 @@ export default function Home() {
       cancelAnimationFrame(frame);
     };
   }, []);
-
-  // Testimonial card scroll animation
-  useEffect(() => {
-    let target = 0;
-    let current = 0;
-    let frame = 0;
-    let lastTime = performance.now();
-
-    const updateTarget = () => {
-      const section = document.querySelector(".testimonials-section") as HTMLElement | null;
-      if (!section) return;
-
-      const rect = section.getBoundingClientRect();
-      const start = window.innerHeight * 0.9;
-      const distance = 700;
-
-      target = Math.min(Math.max((start - rect.top) / distance, 0), 1);
-    };
-
-    const animate = (time: number) => {
-      // 8D Smoothness: Frame-rate independent exponential damping
-      const delta = (time - lastTime) / 1000;
-      lastTime = time;
-
-      // 4 is the smoothing speed for testimonials (slightly floatier)
-      current += (target - current) * (1 - Math.exp(-4 * delta));
-      
-      if (Math.abs(target - current) < 0.0005) current = target;
-
-      setTestimonialProgress(current);
-      frame = requestAnimationFrame(animate);
-    };
-
-    window.addEventListener("scroll", updateTarget, { passive: true });
-    updateTarget();
-    frame = requestAnimationFrame(animate);
-
-    return () => {
-      window.removeEventListener("scroll", updateTarget);
-      cancelAnimationFrame(frame);
-    };
-  }, []);
-
-  // Apply the testimonial transforms directly to the DOM
-  useEffect(() => {
-    const cards = Array.from(document.querySelectorAll(".testimonial-card")) as HTMLElement[];
-    const [leftCard, middleCard, rightCard] = cards;
-
-    if (leftCard && middleCard && rightCard) {
-      const current = testimonialProgress;
-      const shift = (1 - current) * 85;
-      const scale = 0.92 + current * 0.08;
-      const opacity = 0.5 + current * 0.5;
-      // 8D Depth: Dynamic shadow that grows as the cards move into place
-      const shadowY = 20 + current * 30;
-      const shadowBlur = 30 + current * 40;
-
-      leftCard.style.transform = `translate3d(${shift}%, 0, 0) scale(${scale})`;
-      rightCard.style.transform = `translate3d(${-shift}%, 0, 0) scale(${scale})`;
-      leftCard.style.opacity = `${opacity}`;
-      rightCard.style.opacity = `${opacity}`;
-      
-      leftCard.style.boxShadow = `0 ${shadowY}px ${shadowBlur}px rgba(0,0,0,${current * 0.08})`;
-      rightCard.style.boxShadow = `0 ${shadowY}px ${shadowBlur}px rgba(0,0,0,${current * 0.08})`;
-      middleCard.style.boxShadow = `0 30px 60px rgba(0,0,0,0.1)`;
-
-      middleCard.style.transform = "translate3d(0, 0, 0) scale(1)";
-
-      leftCard.style.zIndex = "1";
-      rightCard.style.zIndex = "1";
-      middleCard.style.zIndex = "3";
-    }
-  }, [testimonialProgress]);
 
   // 8D Floating CTA Orbs
   useEffect(() => {
@@ -388,42 +289,6 @@ export default function Home() {
               </div>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* TESTIMONIALS */}
-      <section className="testimonials-section">
-        <div className="testimonials-heading">
-          <span className="section-label">CUSTOMER STORIES</span>
-
-          <h2>
-            Built around
-            <br />
-            real businesses
-          </h2>
-
-          <p>Technology should make business feel simpler, not more complicated</p>
-        </div>
-
-        <div className="testimonials-grid">
-          {testimonials.map((testimonial) => (
-            <article className={`testimonial-card ${testimonial.className}`} key={testimonial.name}>
-              <div className="testimonial-top">
-                <span className="quote">“</span>
-                <span className="testimonial-rating">★★★★★</span>
-              </div>
-
-              <p className="testimonial-text">{testimonial.text}</p>
-
-              <div className="testimonial-person">
-                <div className={`person-avatar ${testimonial.avatar}`}>{testimonial.initials}</div>
-                <div>
-                  <strong>{testimonial.name}</strong>
-                  <span>{testimonial.role}</span>
-                </div>
-              </div>
-            </article>
-          ))}
         </div>
       </section>
 
