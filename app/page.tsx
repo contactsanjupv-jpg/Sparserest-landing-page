@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 import Hero3D from "@/components/Hero3D";
 import Intelligence3D from "@/components/Intelligence3D";
