@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import Hero3D from "@/components/Hero3D";
 import Intelligence3D from "@/components/Intelligence3D";
 import PerformanceGraph from "@/components/PerformanceGraph";
+import ParticleLogo from "@/components/ParticleLogo";
 
 const integrations = [
   { icon: "↗", className: "icon-orange" },
@@ -283,12 +284,8 @@ export default function Home() {
             </div>
           </div>
 
-          <div className="integration-grid">
-            {integrations.map((item, index) => (
-              <div className={`integration-icon ${item.className}`} key={index}>
-                {item.icon}
-              </div>
-            ))}
+      <div className="integration-grid integration-particle-grid">
+            <ParticleLogo imageUrl="/logo.png" />
           </div>
         </div>
       </section>
