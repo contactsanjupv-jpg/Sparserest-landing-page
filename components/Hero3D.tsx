@@ -4,11 +4,11 @@
 
 import { Canvas, useFrame, useThree } from "@react-three/fiber";
 import { Float, Sparkles } from "@react-three/drei";
-import { useRef, useMemo } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
 
 /* ------------------------------------------------------------------ */
-/*  1. The Crisscross Rig Globe (with 8D glow layers)                  */
+/*  1. Crisscross rig globe                                            */
 /* ------------------------------------------------------------------ */
 function RiggedGlobe() {
   const group = useRef<THREE.Group>(null);
@@ -21,8 +21,6 @@ function RiggedGlobe() {
 
   useFrame((_state, delta) => {
     if (group.current) group.current.rotation.y += 0.05 * delta;
-
-    // Frame-rate independent rotations (smooth as hell on any refresh rate)
     if (rig1.current) rig1.current.rotation.z += 0.1 * delta;
     if (rig2.current) rig2.current.rotation.x += 0.15 * delta;
     if (rig3.current) rig3.current.rotation.y -= 0.12 * delta;
@@ -33,18 +31,11 @@ function RiggedGlobe() {
 
   return (
     <group ref={group}>
-      {/* 1. Inner Core Lattice (Data core) */}
       <mesh>
         <icosahedronGeometry args={[0.6, 2]} />
-        <meshBasicMaterial
-          color="#111111"
-          wireframe
-          transparent
-          opacity={0.12}
-        />
+        <meshBasicMaterial color="#111111" wireframe transparent opacity={0.12} />
       </mesh>
 
-      {/* 2. Equatorial Rig + Glow Halo */}
       <mesh ref={rig1} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[1.3, 0.006, 16, 128]} />
         <meshBasicMaterial color="#111111" transparent opacity={0.35} />
@@ -60,7 +51,6 @@ function RiggedGlobe() {
         />
       </mesh>
 
-      {/* 3. Primary Meridian Rig + Glow */}
       <mesh ref={rig2}>
         <torusGeometry args={[1.3, 0.005, 16, 128]} />
         <meshBasicMaterial color="#333333" transparent opacity={0.25} />
@@ -76,7 +66,6 @@ function RiggedGlobe() {
         />
       </mesh>
 
-      {/* 4. Secondary Meridian Rig + Glow */}
       <mesh ref={rig3} rotation={[0, Math.PI / 2, 0]}>
         <torusGeometry args={[1.3, 0.005, 16, 128]} />
         <meshBasicMaterial color="#333333" transparent opacity={0.25} />
@@ -92,25 +81,19 @@ function RiggedGlobe() {
         />
       </mesh>
 
-      {/* 5. Diagonal Crisscross Rig 1 */}
       <mesh ref={rig4} rotation={[Math.PI / 4, Math.PI / 4, 0]}>
         <torusGeometry args={[1.3, 0.004, 16, 128]} />
         <meshBasicMaterial color="#555555" transparent opacity={0.18} />
       </mesh>
-
-      {/* 6. Diagonal Crisscross Rig 2 */}
       <mesh ref={rig5} rotation={[-Math.PI / 4, -Math.PI / 4, 0]}>
         <torusGeometry args={[1.3, 0.004, 16, 128]} />
         <meshBasicMaterial color="#555555" transparent opacity={0.18} />
       </mesh>
-
-      {/* 7. Diagonal Crisscross Rig 3 */}
       <mesh ref={rig6} rotation={[Math.PI / 3, -Math.PI / 6, Math.PI / 4]}>
         <torusGeometry args={[1.3, 0.003, 16, 128]} />
         <meshBasicMaterial color="#777777" transparent opacity={0.12} />
       </mesh>
 
-      {/* 8. Structural Nodes at Intersections (with glow spheres) */}
       <mesh position={[1.3, 0, 0]}>
         <sphereGeometry args={[0.035, 16, 16]} />
         <meshBasicMaterial color="#111111" />
@@ -125,7 +108,6 @@ function RiggedGlobe() {
           depthWrite={false}
         />
       </mesh>
-
       <mesh position={[-1.3, 0, 0]}>
         <sphereGeometry args={[0.035, 16, 16]} />
         <meshBasicMaterial color="#111111" />
@@ -140,7 +122,6 @@ function RiggedGlobe() {
           depthWrite={false}
         />
       </mesh>
-
       <mesh position={[0, 1.3, 0]}>
         <sphereGeometry args={[0.025, 16, 16]} />
         <meshBasicMaterial color="#333333" />
@@ -157,8 +138,6 @@ function RiggedGlobe() {
         <sphereGeometry args={[0.025, 16, 16]} />
         <meshBasicMaterial color="#333333" />
       </mesh>
-
-      {/* 9. The "Storm" Anomaly (Structural disruption) */}
       <mesh position={[0.9, -0.5, 1.0]} rotation={[0, 0.8, 0.2]}>
         <torusGeometry args={[0.12, 0.008, 16, 32]} />
         <meshBasicMaterial color="#111111" transparent opacity={0.5} />
@@ -168,14 +147,14 @@ function RiggedGlobe() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  2. Minimalist Interface Rings (with 8D glow halos)                 */
+/*  2. Interface rings                                                 */
 /* ------------------------------------------------------------------ */
 function InterfaceRings() {
   const r1 = useRef<THREE.Mesh>(null);
   const r2 = useRef<THREE.Mesh>(null);
   const r3 = useRef<THREE.Mesh>(null);
 
-  useFrame((state, delta) => {
+  useFrame((_state, delta) => {
     if (r1.current) r1.current.rotation.z += 0.1 * delta;
     if (r2.current) r2.current.rotation.x -= 0.15 * delta;
     if (r3.current) r3.current.rotation.y += 0.08 * delta;
@@ -183,7 +162,6 @@ function InterfaceRings() {
 
   return (
     <group>
-      {/* Equatorial Data Track + Glow Halo */}
       <mesh ref={r1} rotation={[Math.PI / 2, 0, 0]}>
         <torusGeometry args={[2.0, 0.003, 16, 200]} />
         <meshBasicMaterial color="#111111" transparent opacity={0.2} />
@@ -203,7 +181,6 @@ function InterfaceRings() {
         />
       </mesh>
 
-      {/* Tilted Interface Ring + Glow */}
       <mesh ref={r2} rotation={[1.2, 0.6, 0.4]}>
         <torusGeometry args={[2.3, 0.002, 16, 200]} />
         <meshBasicMaterial color="#333333" transparent opacity={0.15} />
@@ -219,7 +196,6 @@ function InterfaceRings() {
         />
       </mesh>
 
-      {/* Outer Boundary Ring + Glow */}
       <mesh ref={r3} rotation={[0.4, 1.4, 0.8]}>
         <torusGeometry args={[2.6, 0.0015, 16, 200]} />
         <meshBasicMaterial color="#555555" transparent opacity={0.1} />
@@ -239,116 +215,90 @@ function InterfaceRings() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  3. Subtle 4D Hypercube (Distant, mind-bending background element)  */
+/*  3. Projected 4D hypercube                                          */
 /* ------------------------------------------------------------------ */
-function Hypercube4D() {
-  const geometryRef = useRef<THREE.BufferGeometry>(null);
+type Vec4 = [number, number, number, number];
 
-  const vertices4D = useMemo(() => {
-    const verts = [];
+function Hypercube4D() {
+  const { vertices, edges, geometry, projected } = useMemo(() => {
+    const vertices: Vec4[] = [];
     for (let i = 0; i < 16; i++) {
-      verts.push([
-        (i & 1) ? 1 : -1,
-        (i & 2) ? 1 : -1,
-        (i & 4) ? 1 : -1,
-        (i & 8) ? 1 : -1,
+      vertices.push([
+        i & 1 ? 1 : -1,
+        i & 2 ? 1 : -1,
+        i & 4 ? 1 : -1,
+        i & 8 ? 1 : -1,
       ]);
     }
-    return verts;
-  }, []);
 
-  const edges = useMemo(() => {
-    const e = [];
+    // Two vertices share an edge when their indices differ in exactly one bit.
+    const edges: [number, number][] = [];
     for (let i = 0; i < 16; i++) {
       for (let j = i + 1; j < 16; j++) {
-        let diff = 0;
-        if ((i & 1) !== (j & 1)) diff++;
-        if ((i & 2) !== (j & 2)) diff++;
-        if ((i & 4) !== (j & 4)) diff++;
-        if ((i & 8) !== (j & 8)) diff++;
-        if (diff === 1) e.push([i, j]);
+        const diff = i ^ j;
+        if ((diff & (diff - 1)) === 0) edges.push([i, j]);
       }
     }
-    return e;
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute(
+      "position",
+      new THREE.BufferAttribute(new Float32Array(edges.length * 2 * 3), 3).setUsage(
+        THREE.DynamicDrawUsage,
+      ),
+    );
+
+    return { vertices, edges, geometry, projected: new Float32Array(16 * 3) };
   }, []);
 
-  const positions = useMemo(() => new Float32Array(edges.length * 2 * 3), [edges]);
+  useEffect(() => () => geometry.dispose(), [geometry]);
 
   useFrame((state) => {
-    const angleXW = state.clock.elapsedTime * 0.08;
-    const angleYW = state.clock.elapsedTime * 0.12;
-    const angleZW = state.clock.elapsedTime * 0.05;
-
-    const cosXW = Math.cos(angleXW), sinXW = Math.sin(angleXW);
-    const cosYW = Math.cos(angleYW), sinYW = Math.sin(angleYW);
-    const cosZW = Math.cos(angleZW), sinZW = Math.sin(angleZW);
-
-    const projected3D = [];
+    const t = state.clock.elapsedTime;
+    const cosXW = Math.cos(t * 0.08), sinXW = Math.sin(t * 0.08);
+    const cosYW = Math.cos(t * 0.12), sinYW = Math.sin(t * 0.12);
+    const cosZW = Math.cos(t * 0.05), sinZW = Math.sin(t * 0.05);
 
     for (let i = 0; i < 16; i++) {
-      let [x, y, z, w] = vertices4D[i];
+      let [x, y, z, w] = vertices[i];
 
       const nx = x * cosXW - w * sinXW;
-      let nw = x * sinXW + w * cosXW;
-      x = nx; w = nw;
+      w = x * sinXW + w * cosXW;
+      x = nx;
 
       const ny = y * cosYW - w * sinYW;
-      nw = y * sinYW + w * cosYW;
-      y = ny; w = nw;
+      w = y * sinYW + w * cosYW;
+      y = ny;
 
       const nz = z * cosZW - w * sinZW;
-      nw = z * sinZW + w * cosZW;
-      z = nz; w = nw;
+      w = z * sinZW + w * cosZW;
+      z = nz;
 
-      const distance = 2.5;
-      const k = distance / (distance - w);
-      
-      const px = x * k * 2.5;
-      const py = y * k * 2.5;
-      const pz = z * k * 2.5;
-
-      projected3D.push([px, py, pz]);
+      const scale = (2.5 / (2.5 - w)) * 2.5;
+      projected[i * 3] = x * scale;
+      projected[i * 3 + 1] = y * scale;
+      projected[i * 3 + 2] = z * scale;
     }
 
-    let index = 0;
-    for (const edge of edges) {
-      const p1 = projected3D[edge[0]];
-      const p2 = projected3D[edge[1]];
-      positions[index++] = p1[0]; positions[index++] = p1[1]; positions[index++] = p1[2];
-      positions[index++] = p2[0]; positions[index++] = p2[1]; positions[index++] = p2[2];
-    }
+    const attribute = geometry.getAttribute("position") as THREE.BufferAttribute;
+    const out = attribute.array as Float32Array;
 
-    if (geometryRef.current) geometryRef.current.attributes.position.needsUpdate = true;
+    edges.forEach(([a, b], e) => {
+      out.set(projected.subarray(a * 3, a * 3 + 3), e * 6);
+      out.set(projected.subarray(b * 3, b * 3 + 3), e * 6 + 3);
+    });
+
+    attribute.needsUpdate = true;
   });
 
   return (
     <group position={[0, 0, -4]} rotation={[0.4, 0.2, 0.8]}>
-      <lineSegments>
-        <bufferGeometry ref={geometryRef}>
-          <bufferAttribute
-            attach="attributes-position"
-            args={[positions, 3]}
-            count={positions.length / 3}
-            itemSize={3}
-            usage={THREE.DynamicDrawUsage}
-          />
-        </bufferGeometry>
-        <lineBasicMaterial color="#aaaaaa" linewidth={1} transparent opacity={0.08} />
+      <lineSegments geometry={geometry} frustumCulled={false}>
+        <lineBasicMaterial color="#aaaaaa" transparent opacity={0.08} />
       </lineSegments>
-      {/* Glow duplicate for volumetric 8D feel */}
-      <lineSegments>
-        <bufferGeometry ref={geometryRef}>
-          <bufferAttribute
-            attach="attributes-position"
-            args={[positions, 3]}
-            count={positions.length / 3}
-            itemSize={3}
-            usage={THREE.DynamicDrawUsage}
-          />
-        </bufferGeometry>
+      <lineSegments geometry={geometry} frustumCulled={false}>
         <lineBasicMaterial
           color="#aaaaaa"
-          linewidth={3}
           transparent
           opacity={0.02}
           blending={THREE.AdditiveBlending}
@@ -360,7 +310,7 @@ function Hypercube4D() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  4. Deep Space "Astronaut" Particle Field (The 8D feel)             */
+/*  4. Deep-space particles                                            */
 /* ------------------------------------------------------------------ */
 function DeepSpaceParticles() {
   const pointsRef = useRef<THREE.Points>(null);
@@ -369,33 +319,28 @@ function DeepSpaceParticles() {
   const particles = useMemo(() => {
     const count = 3000;
     const positions = new Float32Array(count * 3);
-
     for (let i = 0; i < count; i++) {
-      const r = 4 + Math.random() * 15;
+      const radius = 4 + Math.random() * 15;
       const theta = Math.random() * Math.PI * 2;
       const phi = Math.acos(2 * Math.random() - 1);
-
-      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta);
-      positions[i * 3 + 1] = r * Math.cos(phi);
-      positions[i * 3 + 2] = r * Math.sin(phi) * Math.sin(theta);
+      positions[i * 3] = radius * Math.sin(phi) * Math.cos(theta);
+      positions[i * 3 + 1] = radius * Math.cos(phi);
+      positions[i * 3 + 2] = radius * Math.sin(phi) * Math.sin(theta);
     }
     return positions;
   }, []);
 
   useFrame((state, delta) => {
-    if (pointsRef.current) {
-      pointsRef.current.rotation.y += 0.02 * delta;
-      pointsRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.05) * 0.02;
-    }
-    if (glowRef.current) {
-      glowRef.current.rotation.y += 0.02 * delta;
-      glowRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.05) * 0.02;
+    const tiltX = Math.sin(state.clock.elapsedTime * 0.05) * 0.02;
+    for (const points of [pointsRef.current, glowRef.current]) {
+      if (!points) continue;
+      points.rotation.y += 0.02 * delta;
+      points.rotation.x = tiltX;
     }
   });
 
   return (
     <group>
-      {/* Glow Layer (8D halo) */}
       <points ref={glowRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -415,8 +360,6 @@ function DeepSpaceParticles() {
           depthWrite={false}
         />
       </points>
-
-      {/* Core Layer (crisp stars) */}
       <points ref={pointsRef}>
         <bufferGeometry>
           <bufferAttribute
@@ -432,7 +375,6 @@ function DeepSpaceParticles() {
           transparent
           opacity={0.3}
           sizeAttenuation
-          blending={THREE.NormalBlending}
           depthWrite={false}
         />
       </points>
@@ -441,7 +383,7 @@ function DeepSpaceParticles() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  5. Camera Parallax (Creates the massive 8D depth illusion)         */
+/*  5. Camera parallax                                                 */
 /* ------------------------------------------------------------------ */
 function CameraRig() {
   const { camera } = useThree();
@@ -450,8 +392,6 @@ function CameraRig() {
   useFrame((state, delta) => {
     const { x, y } = state.pointer;
     target.current.set(x * 1.5, y * 1.0, 9 - Math.abs(x) * 0.8);
-
-    // Frame-rate independent smoothing via damp (buttery smooth on any Hz)
     camera.position.x = THREE.MathUtils.damp(camera.position.x, target.current.x, 4, delta);
     camera.position.y = THREE.MathUtils.damp(camera.position.y, target.current.y, 4, delta);
     camera.position.z = THREE.MathUtils.damp(camera.position.z, target.current.z, 4, delta);
@@ -462,50 +402,30 @@ function CameraRig() {
 }
 
 /* ------------------------------------------------------------------ */
-/*  Main Scene                                                         */
+/*  Scene + export                                                     */
 /* ------------------------------------------------------------------ */
 function Scene() {
   return (
     <>
       <CameraRig />
-
-      {/* The entire core assembly floats gently */}
       <Float speed={1.0} rotationIntensity={0.1} floatIntensity={0.3}>
         <RiggedGlobe />
         <InterfaceRings />
         <Hypercube4D />
       </Float>
-
-      {/* The massive deep space particle field */}
       <DeepSpaceParticles />
-
-      {/* Subtle twinkling stars scattered across the universe */}
-      <Sparkles
-        count={200}
-        scale={20}
-        size={1.5}
-        speed={0.1}
-        opacity={0.2}
-        color="#000000"
-      />
+      <Sparkles count={200} scale={20} size={1.5} speed={0.1} opacity={0.2} color="#000000" />
     </>
   );
 }
 
-/* ------------------------------------------------------------------ */
-/*  Export                                                             */
-/* ------------------------------------------------------------------ */
 export default function Hero3D() {
   return (
-    <div className="hero-3d w-full h-full min-h-[600px] relative">
+    <div className="hero-3d">
       <Canvas
         camera={{ position: [0, 0, 9], fov: 45 }}
-        dpr={[1, 2]}
-        gl={{ 
-          alpha: true,
-          antialias: true, 
-          powerPreference: "high-performance" 
-        }}
+        dpr={[1, 1.5]}
+        gl={{ alpha: true, antialias: true, powerPreference: "high-performance" }}
       >
         <Scene />
       </Canvas>
