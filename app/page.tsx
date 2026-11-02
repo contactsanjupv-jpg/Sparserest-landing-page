@@ -347,9 +347,7 @@ export default function Home() {
       <div className="footer-column">
         <span>Products</span>
 
-        <a href="https://xflow.sparserest.com/">
-          XFlow
-        </a>
+      
       </div>
 
       <div className="footer-column">
