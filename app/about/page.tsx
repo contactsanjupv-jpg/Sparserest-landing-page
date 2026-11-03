@@ -13,11 +13,11 @@ export default function AboutPage() {
       <div className="mx-auto w-full max-w-4xl px-6 py-10 sm:px-8 sm:py-16">
 
         <header className="mb-20">
-          <Link href="/" className="mb-20 inline-flex -translate-x-12">
+          <Link href="/" className="mb-20 inline-flex">
             <img
               src="/logo.png"
               alt="SparseReST logo"
-              className="logo-image"
+              className="logo-image -my-3 -ml-6"
             />
           </Link>
 
