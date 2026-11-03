@@ -33,7 +33,7 @@ export default function PrivacyPage() {
             <p className="mt-6 max-w-2xl text-base leading-7 text-[#68645e] sm:text-lg">
               SparseReST takes your privacy seriously. This Policy explains what
               information we receive when you visit our website or contact us,
-              how we use it, and the choices you have.
+              how we use it, and the choices you have
             </p>
 
             <p className="mt-5 text-sm text-[#8a867f]">
@@ -138,19 +138,23 @@ export default function PrivacyPage() {
             </h2>
 
             <p className="mt-4 text-[15px] leading-7 text-[#5f5b55]">
-              We do not use this website to build advertising profiles about visitors.
-              The website's hosting and security systems may still use
-              technical processes needed to deliver pages and protect the site.
+              The analytics records page views, referring pages, approximate
+              geographic location, device type, operating system, browser
+              information and event timestamps. This information is used to
+              produce aggregated website statistics.
             </p>
 
             <p className="mt-4 text-[15px] leading-7 text-[#5f5b55]">
-              If we add tools that measure how people use the website, we will update
-              this Policy to explain what those tools collect and why.
+              Our analytics system does not use cookies to identify visitors.
+              Instead, it uses a hash generated from an incoming request. This
+              identifier is automatically discarded after 24 hours and does not
+              allow visitors to be tracked across different websites or days.
             </p>
 
             <p className="mt-4 text-[15px] leading-7 text-[#5f5b55]">
-              You can control cookies through your browser settings. Blocking some
-              website technologies may affect how the site works.
+              You can manage cookies and similar storage through your browser
+              settings. The website may also use technical processes necessary
+              for its operation and security.
             </p>
           </section>
 

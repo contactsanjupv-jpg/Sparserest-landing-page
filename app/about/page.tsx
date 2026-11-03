@@ -27,16 +27,16 @@ export default function AboutPage() {
             </p>
 
             <h1 className="text-5xl font-semibold leading-[0.95] tracking-[-0.055em] sm:text-7xl">
-              Industry is changing.
+              Industry is changing
               <br />
-              The way we build for it should too.
+              The way we build for it should too
             </h1>
 
             <p className="mt-8 max-w-2xl text-base leading-8 text-[#68645e] sm:text-xl">
               SparseReST is an industrial technology company. We are building
               for a future in which critical decisions about materials,
               manufacturing, and technology can be made with greater clarity
-              and confidence.
+              and confidence
             </p>
           </div>
         </header>
@@ -50,21 +50,21 @@ export default function AboutPage() {
 
             <div>
               <h2 className="text-3xl font-semibold leading-tight tracking-[-0.035em] sm:text-4xl">
-                Progress depends on better decisions.
+                Progress depends on better decisions
               </h2>
 
               <p className="mt-6 text-[15px] leading-8 text-[#5f5b55]">
                 Industry is built on decisions that carry real consequences.
                 A change in a material, a process, or a source can affect
                 performance, reliability, cost, and the people who depend on
-                the result.
+                the result
               </p>
 
               <p className="mt-5 text-[15px] leading-8 text-[#5f5b55]">
                 Yet the knowledge needed to make those decisions is often
                 difficult to bring together. We believe technology can make
                 that knowledge more accessible, more useful, and easier to
-                act on.
+                act on
               </p>
             </div>
 
@@ -80,20 +80,20 @@ export default function AboutPage() {
 
             <div>
               <h2 className="text-3xl font-semibold leading-tight tracking-[-0.035em] sm:text-4xl">
-                Making technical change easier to understand.
+                Making technical change easier to understand
               </h2>
 
               <p className="mt-6 text-[15px] leading-8 text-[#5f5b55]">
                 We are focused on the difficult decisions behind industrial
                 change: understanding requirements, evaluating alternatives,
                 interpreting evidence, and knowing what still needs to be
-                tested.
+                tested
               </p>
 
               <p className="mt-5 text-[15px] leading-8 text-[#5f5b55]">
                 This is a long-standing challenge across industry. Our view is
                 that better engineering and better use of data can make the
-                process more rigorous, transparent, and informed.
+                process more rigorous, transparent, and informed
               </p>
             </div>
 
@@ -109,7 +109,7 @@ export default function AboutPage() {
 
             <div>
               <h2 className="text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">
-                The work matters more than the noise around it.
+                The work matters more than the noise around it
               </h2>
 
               <div className="mt-10 space-y-8">
@@ -122,7 +122,7 @@ export default function AboutPage() {
                   <p className="mt-2 text-[15px] leading-7 text-[#68645e]">
                     We begin with the conditions, constraints, and evidence
                     that exist in the real world. Technology has to answer to
-                    them.
+                    them
                   </p>
                 </div>
 
@@ -133,7 +133,7 @@ export default function AboutPage() {
 
                   <p className="mt-2 text-[15px] leading-7 text-[#68645e]">
                     Good decisions depend on understanding both the evidence
-                    and its limits. Uncertainty should be visible, not hidden.
+                    and its limits. Uncertainty should be visible, not hidden
                   </p>
                 </div>
 
@@ -144,7 +144,7 @@ export default function AboutPage() {
 
                   <p className="mt-2 text-[15px] leading-7 text-[#68645e]">
                     We care about problems where reliability, traceability,
-                    and sound engineering judgment matter.
+                    and sound engineering judgment matter
                   </p>
                 </div>
 
@@ -156,7 +156,7 @@ export default function AboutPage() {
                   <p className="mt-2 text-[15px] leading-7 text-[#68645e]">
                     We are building a company for the long term. That means
                     taking the time to understand difficult problems and
-                    creating foundations that can support meaningful progress.
+                    creating foundations that can support meaningful progress
                   </p>
                 </div>
 
@@ -173,14 +173,14 @@ export default function AboutPage() {
           </p>
 
           <h2 className="mt-6 max-w-3xl text-3xl font-semibold leading-tight tracking-[-0.04em] sm:text-5xl">
-            Build a company that moves industry forward.
+            Build a company that moves industry forward
           </h2>
 
           <p className="mt-6 max-w-2xl text-[15px] leading-7 text-white/60">
             We intend to build SparseReST into a global industrial technology
             company. The scale of that ambition demands patience, sound
             engineering, and a willingness to take on problems that are not
-            easily solved.
+            easily solved
           </p>
 
         </section>
@@ -200,7 +200,7 @@ export default function AboutPage() {
 
               <p className="mt-5 max-w-xl text-[15px] leading-7 text-[#68645e]">
                 For company enquiries and correspondence, contact us at the
-                address below.
+                address below
               </p>
 
               <a

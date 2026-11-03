@@ -12,17 +12,17 @@ const capabilities = [
   {
     number: "01",
     title: "Software products",
-    text: "We create software products around clear ideas and the needs they are built to serve.",
+    text: "We create software products around clear ideas and the needs they are built to serve",
   },
   {
     number: "02",
     title: "Connected systems",
-    text: "We develop systems that allow applications, information, and processes to work together.",
+    text: "We develop systems that allow applications, information, and processes to work together",
   },
   {
     number: "03",
     title: "Built to evolve",
-    text: "Our engineering is designed to accommodate new requirements and changing technology.",
+    text: "Our engineering is designed to accommodate new requirements and changing technology",
   },
 ];
 
@@ -144,7 +144,7 @@ export default function Home() {
             </h1>
 
             <p>
-              SparseReST is an independent technology company creating software products and digital systems.
+              SparseReST is an independent technology company creating software products and digital systems
             </p>
 
             
@@ -163,13 +163,13 @@ export default function Home() {
           <span className="section-label">THE WORK</span>
 
           <h2>
-            Technology,
+            Technology
             <br />
             put to work
           </h2>
 
           <p>
-            Our work spans software products, connected systems, and digital tools built for specific uses.
+            Our work spans software products, connected systems, and digital tools built for specific uses
           </p>
         </div>
 
@@ -218,7 +218,7 @@ export default function Home() {
             </h3>
 
             <p>
-              We focus on the details that make software useful: how it works, how it fits together, and how people use it.
+              We focus on the details that make software useful: how it works, how it fits together, and how people use it
             </p>
 
             <div className="capability-list">
@@ -249,7 +249,7 @@ export default function Home() {
             </h2>
 
             <p>
-              Software depends on the systems around it. We design for the connections between applications, information, and tools.
+              Software depends on the systems around it. We design for the connections between applications, information, and tools
             </p>
 
             
@@ -284,15 +284,15 @@ export default function Home() {
       <span className="section-label">ENGINEERED FOR USE</span>
 
       <h2>
-        Thoughtful engineering.
+        Thoughtful engineering
         <br />
-        Useful technology.
+        Useful technology
         <br />
-        Built to evolve.
+        Built to evolve
       </h2>
 
       <p>
-        Every detail matters: how a system is designed, how its parts work together, and how well it serves its purpose over time.
+        Every detail matters: how a system is designed, how its parts work together, and how well it serves its purpose over time
       </p>
 
       <a href="mailto:contact@sparserest.com" className="button cta-primary">
@@ -321,7 +321,7 @@ export default function Home() {
       </a>
 
       <p>
-        An independent technology company creating software products and digital systems.
+        An independent technology company creating software products and digital systems
       </p>
     </div>
 
