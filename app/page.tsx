@@ -1,47 +1,38 @@
 "use client";
 
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 
 import Hero3D from "@/components/Hero3D";
 import Intelligence3D from "@/components/Intelligence3D";
 import PerformanceGraph from "@/components/PerformanceGraph";
+import ParticleLogo from "@/components/ParticleLogo";
 
-const integrations = [
-  { icon: "↗", className: "icon-orange" },
-  { icon: "✦", className: "icon-purple" },
-  { icon: "◇", className: "icon-blue" },
-  { icon: "◆", className: "icon-indigo" },
-  { icon: "○", className: "icon-red" },
-  { icon: "✺", className: "icon-yellow" },
-  { icon: "◉", className: "icon-cyan" },
-  { icon: "✦", className: "icon-pink" },
-];
 
 const capabilities = [
   {
     number: "01",
-    title: "Intelligent systems",
-    text: "We build technology that removes repetitive work and gives businesses more room to grow.",
+    title: "Software products",
+    text: "We create software products around clear ideas and the needs they are built to serve.",
   },
   {
     number: "02",
-    title: "Connected workflows",
-    text: "Bring your tools, data, and customer interactions together into one seamless experience.",
+    title: "Connected systems",
+    text: "We develop systems that allow applications, information, and processes to work together.",
   },
   {
     number: "03",
-    title: "Built to scale",
-    text: "Flexible systems designed to evolve as your business gets bigger and more complex.",
+    title: "Built to evolve",
+    text: "Our engineering is designed to accommodate new requirements and changing technology.",
   },
 ];
 
 
 
 const featureTabs = [
-  { icon: "✦", label: "Intelligent systems" },
-  { icon: "⌁", label: "Data & analytics" },
+  { icon: "✦", label: "Software products" },
+  { icon: "⌁", label: "Data systems" },
   { icon: "◈", label: "Automation" },
-  { icon: "◇", label: "Digital experiences" },
+  { icon: "◇", label: "Digital products" },
 ];
 
 export default function Home() {
@@ -133,7 +124,7 @@ export default function Home() {
         </div>
 
         <a href="mailto:contact@sparserest.com" className="nav-button">
-          Contact us
+          Contact
           <span>→</span>
         </a>
       </nav>
@@ -142,19 +133,18 @@ export default function Home() {
       <section className="hero" id="about">
         <div className="hero-content">
           <div className="hero-copy">
-            <span className="hero-eyebrow">TECHNOLOGY FOR MODERN BUSINESS</span>
+            <span className="hero-eyebrow">SOFTWARE AND TECHNOLOGY</span>
 
             <h1>
-              Build smarter
+              Ideas into
               <br />
-              Move faster
+              working
               <br />
-              Go further
+              software
             </h1>
 
             <p>
-              We build intelligent digital systems that help ambitious businesses automate work,
-              connect their operations, and create better customer experiences.
+              SparseReST is an independent technology company creating software products and digital systems.
             </p>
 
             
@@ -170,17 +160,16 @@ export default function Home() {
       {/* FEATURES */}
       <section className="performance-section" id="features">
         <div className="performance-heading">
-          <span className="section-label">WHAT WE BUILD</span>
+          <span className="section-label">THE WORK</span>
 
           <h2>
-            Technology that
+            Technology,
             <br />
-            works for you
+            put to work
           </h2>
 
           <p>
-            We combine intelligent automation, connected systems, and thoughtful product design to
-            create technology that makes businesses simpler and more powerful
+            Our work spans software products, connected systems, and digital tools built for specific uses.
           </p>
         </div>
 
@@ -220,17 +209,16 @@ export default function Home() {
           </div>
 
           <div className="showcase-copy">
-            <span className="eyebrow">INTELLIGENT TECHNOLOGY</span>
+            <span className="eyebrow">SOFTWARE IN PRACTICE</span>
 
             <h3>
-              Turn complexity
+              From idea
               <br />
-              into momentum
+              to application
             </h3>
 
             <p>
-              From automation to customer experiences, we create connected systems that take
-              complicated processes and make them feel effortless
+              We focus on the details that make software useful: how it works, how it fits together, and how people use it.
             </p>
 
             <div className="capability-list">
@@ -252,17 +240,16 @@ export default function Home() {
       <section className="integrations-section" id="integrations">
         <div className="integrations-content">
           <div className="integrations-copy">
-            <span className="section-label">CONNECT EVERYTHING</span>
+            <span className="section-label">CONNECTED BY DESIGN</span>
 
             <h2>
-              One system
+              Technology
               <br />
-              Every connection
+              works together
             </h2>
 
             <p>
-              Your business already runs on dozens of tools. We connect them into a system that
-              actually works together
+              Software depends on the systems around it. We design for the connections between applications, information, and tools.
             </p>
 
             
@@ -270,25 +257,21 @@ export default function Home() {
             <div className="integration-steps">
               <div className="integration-step">
                 <span>01</span>
-                <p>Connect your existing tools</p>
+                <p>Connect the pieces</p>
               </div>
               <div className="integration-step">
                 <span>02</span>
-                <p>Centralize your workflows</p>
+                <p>Bring information together</p>
               </div>
               <div className="integration-step">
                 <span>03</span>
-                <p>Automate what slows you down</p>
+                <p>Make systems work together</p>
               </div>
             </div>
           </div>
 
-          <div className="integration-grid">
-            {integrations.map((item, index) => (
-              <div className={`integration-icon ${item.className}`} key={index}>
-                {item.icon}
-              </div>
-            ))}
+      <div className="integration-grid integration-particle-grid">
+            <ParticleLogo imageUrl="/logo.png" />
           </div>
         </div>
       </section>
@@ -298,24 +281,22 @@ export default function Home() {
 <section className="bottom-performance-section" id="contact">
   <div className="bottom-performance-inner">
     <div className="performance-intro-copy">
-      <span className="section-label">BUILT FOR CLARITY</span>
+      <span className="section-label">ENGINEERED FOR USE</span>
 
       <h2>
-        Turning complex
+        Thoughtful engineering.
         <br />
-        systems into clear,
+        Useful technology.
         <br />
-        scalable solutions
+        Built to evolve.
       </h2>
 
       <p>
-        Each component is modular, reusable, and optimized for
-        real-world use cases. Teams can move faster while
-        maintaining consistency.
+        Every detail matters: how a system is designed, how its parts work together, and how well it serves its purpose over time.
       </p>
 
       <a href="mailto:contact@sparserest.com" className="button cta-primary">
-        Start a conversation
+        Contact SparseReST
         <span aria-hidden="true">→</span>
       </a>
     </div>
@@ -340,8 +321,7 @@ export default function Home() {
       </a>
 
       <p>
-        Building intelligent digital systems for businesses ready for what&apos;s
-        next
+        An independent technology company creating software products and digital systems.
       </p>
     </div>
 
@@ -350,9 +330,7 @@ export default function Home() {
       <div className="footer-column">
         <span>Products</span>
 
-        <a href="https://xflow.sparserest.com/">
-          XFlow
-        </a>
+      
       </div>
 
       <div className="footer-column">
@@ -400,7 +378,7 @@ export default function Home() {
     </span>
 
     <span>
-      Technology for what&apos;s next
+      SparseReST
     </span>
   </div>
 </footer>

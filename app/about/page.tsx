@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "About — SparseReST",
+  title: "About SparseReST",
   description:
-    "Learn about SparseReST and the technology we build for modern businesses.",
+    "SparseReST is an industrial technology company focused on advancing how industry evaluates and makes technical change.",
 };
 
 export default function AboutPage() {
@@ -12,13 +13,13 @@ export default function AboutPage() {
       <div className="mx-auto w-full max-w-4xl px-6 py-10 sm:px-8 sm:py-16">
 
         <header className="mb-20">
-          <a href="/" className="mb-20 inline-flex -translate-x-12">
+          <Link href="/" className="mb-20 inline-flex">
             <img
               src="/logo.png"
               alt="SparseReST logo"
-              className="logo-image"
+              className="logo-image -my-3 -ml-6"
             />
-          </a>
+          </Link>
 
           <div className="max-w-3xl">
             <p className="mb-5 text-sm font-medium uppercase tracking-[0.16em] text-[#77736d]">
@@ -26,14 +27,16 @@ export default function AboutPage() {
             </p>
 
             <h1 className="text-5xl font-semibold leading-[0.95] tracking-[-0.055em] sm:text-7xl">
-              Building technology
+              Industry is changing.
               <br />
-              for what comes next.
+              The way we build for it should too.
             </h1>
 
             <p className="mt-8 max-w-2xl text-base leading-8 text-[#68645e] sm:text-xl">
-              SparseReST is a technology company that builds software and
-              intelligent digital systems for modern businesses.
+              SparseReST is an industrial technology company. We are building
+              for a future in which critical decisions about materials,
+              manufacturing, and technology can be made with greater clarity
+              and confidence.
             </p>
           </div>
         </header>
@@ -42,23 +45,26 @@ export default function AboutPage() {
           <div className="grid gap-10 sm:grid-cols-[0.7fr_1.3fr]">
 
             <p className="text-sm font-medium uppercase tracking-[0.14em] text-[#77736d]">
-              Who we are
+              Why we exist
             </p>
 
             <div>
               <h2 className="text-3xl font-semibold leading-tight tracking-[-0.035em] sm:text-4xl">
-                We build technology that makes business simpler.
+                Progress depends on better decisions.
               </h2>
 
               <p className="mt-6 text-[15px] leading-8 text-[#5f5b55]">
-                SparseReST creates software and digital systems designed around
-                real business needs.
+                Industry is built on decisions that carry real consequences.
+                A change in a material, a process, or a source can affect
+                performance, reliability, cost, and the people who depend on
+                the result.
               </p>
 
               <p className="mt-5 text-[15px] leading-8 text-[#5f5b55]">
-                We combine engineering design automation data and intelligent
-                technology to create useful systems that help businesses work
-                better.
+                Yet the knowledge needed to make those decisions is often
+                difficult to bring together. We believe technology can make
+                that knowledge more accessible, more useful, and easier to
+                act on.
               </p>
             </div>
 
@@ -69,56 +75,28 @@ export default function AboutPage() {
           <div className="grid gap-10 sm:grid-cols-[0.7fr_1.3fr]">
 
             <p className="text-sm font-medium uppercase tracking-[0.14em] text-[#77736d]">
-              What we build
+              Our focus
             </p>
 
-            <div className="space-y-4">
+            <div>
+              <h2 className="text-3xl font-semibold leading-tight tracking-[-0.035em] sm:text-4xl">
+                Making technical change easier to understand.
+              </h2>
 
-              <div className="rounded-3xl border border-black/10 bg-white/50 p-7">
-                <p className="text-xl font-semibold tracking-[-0.02em]">
-                  Software
-                </p>
+              <p className="mt-6 text-[15px] leading-8 text-[#5f5b55]">
+                We are focused on the difficult decisions behind industrial
+                change: understanding requirements, evaluating alternatives,
+                interpreting evidence, and knowing what still needs to be
+                tested.
+              </p>
 
-                <p className="mt-3 text-[15px] leading-7 text-[#68645e]">
-                  Purpose built software designed to solve real business
-                  problems.
-                </p>
-              </div>
-
-              <div className="rounded-3xl border border-black/10 bg-white/50 p-7">
-                <p className="text-xl font-semibold tracking-[-0.02em]">
-                  Intelligent systems
-                </p>
-
-                <p className="mt-3 text-[15px] leading-7 text-[#68645e]">
-                  Intelligent technology that helps businesses handle complex
-                  work and make better use of their information.
-                </p>
-              </div>
-
-              <div className="rounded-3xl border border-black/10 bg-white/50 p-7">
-                <p className="text-xl font-semibold tracking-[-0.02em]">
-                  Automation
-                </p>
-
-                <p className="mt-3 text-[15px] leading-7 text-[#68645e]">
-                  Systems that reduce repetitive work and connect important
-                  business processes.
-                </p>
-              </div>
-
-              <div className="rounded-3xl border border-black/10 bg-white/50 p-7">
-                <p className="text-xl font-semibold tracking-[-0.02em]">
-                  Digital experiences
-                </p>
-
-                <p className="mt-3 text-[15px] leading-7 text-[#68645e]">
-                  Modern digital experiences built for customers teams and
-                  businesses.
-                </p>
-              </div>
-
+              <p className="mt-5 text-[15px] leading-8 text-[#5f5b55]">
+                This is a long-standing challenge across industry. Our view is
+                that better engineering and better use of data can make the
+                process more rigorous, transparent, and informed.
+              </p>
             </div>
+
           </div>
         </section>
 
@@ -126,57 +104,59 @@ export default function AboutPage() {
           <div className="grid gap-10 sm:grid-cols-[0.7fr_1.3fr]">
 
             <p className="text-sm font-medium uppercase tracking-[0.14em] text-[#77736d]">
-              Our approach
+              How we think
             </p>
 
             <div>
               <h2 className="text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">
-                Simple ideas. Serious engineering.
+                The work matters more than the noise around it.
               </h2>
 
               <div className="mt-10 space-y-8">
 
                 <div>
                   <p className="text-lg font-semibold">
-                    01 Start with the problem
+                    01 Start with reality
                   </p>
 
                   <p className="mt-2 text-[15px] leading-7 text-[#68645e]">
-                    We begin by understanding the problem before deciding what
-                    technology should be used.
+                    We begin with the conditions, constraints, and evidence
+                    that exist in the real world. Technology has to answer to
+                    them.
                   </p>
                 </div>
 
                 <div>
                   <p className="text-lg font-semibold">
-                    02 Build with purpose
+                    02 Be precise about what is known
                   </p>
 
                   <p className="mt-2 text-[15px] leading-7 text-[#68645e]">
-                    Every system we build should have a clear purpose and create
-                    meaningful value for the people using it.
+                    Good decisions depend on understanding both the evidence
+                    and its limits. Uncertainty should be visible, not hidden.
                   </p>
                 </div>
 
                 <div>
                   <p className="text-lg font-semibold">
-                    03 Keep things simple
+                    03 Build for consequential work
                   </p>
 
                   <p className="mt-2 text-[15px] leading-7 text-[#68645e]">
-                    Complex technology should create simple experiences and
-                    clearer workflows.
+                    We care about problems where reliability, traceability,
+                    and sound engineering judgment matter.
                   </p>
                 </div>
 
                 <div>
                   <p className="text-lg font-semibold">
-                    04 Think long term
+                    04 Think beyond the immediate
                   </p>
 
                   <p className="mt-2 text-[15px] leading-7 text-[#68645e]">
-                    We build systems that can grow and evolve with the
-                    businesses that use them.
+                    We are building a company for the long term. That means
+                    taking the time to understand difficult problems and
+                    creating foundations that can support meaningful progress.
                   </p>
                 </div>
 
@@ -189,17 +169,18 @@ export default function AboutPage() {
         <section className="mt-24 rounded-[2rem] bg-[#111111] px-7 py-12 text-white sm:px-12 sm:py-16">
 
           <p className="text-sm font-medium uppercase tracking-[0.14em] text-white/50">
-            Our direction
+            Our ambition
           </p>
 
           <h2 className="mt-6 max-w-3xl text-3xl font-semibold leading-tight tracking-[-0.04em] sm:text-5xl">
-            Technology should become an advantage for the business using it.
+            Build a company that moves industry forward.
           </h2>
 
           <p className="mt-6 max-w-2xl text-[15px] leading-7 text-white/60">
-            SparseReST is focused on creating products and systems that help
-            modern businesses become more capable more connected and easier to
-            operate.
+            We intend to build SparseReST into a global industrial technology
+            company. The scale of that ambition demands patience, sound
+            engineering, and a willingness to take on problems that are not
+            easily solved.
           </p>
 
         </section>
@@ -209,26 +190,26 @@ export default function AboutPage() {
           <div className="grid gap-8 sm:grid-cols-[0.7fr_1.3fr]">
 
             <p className="text-sm font-medium uppercase tracking-[0.14em] text-[#77736d]">
-              Get in touch
+              Contact
             </p>
 
             <div>
               <h2 className="text-3xl font-semibold tracking-[-0.035em] sm:text-4xl">
-                Have something worth building?
+                SparseReST
               </h2>
 
               <p className="mt-5 max-w-xl text-[15px] leading-7 text-[#68645e]">
-                Tell us what you are working on what is not working or what you
-                want to build next.
+                For company enquiries and correspondence, contact us at the
+                address below.
               </p>
 
               <a
-  href="mailto:contact@sparserest.com"
-  style={{ color: "#ffffff" }}
-  className="mt-7 inline-flex items-center justify-center rounded-full bg-[#111111] px-6 py-3 text-sm font-medium transition-transform hover:-translate-y-0.5"
->
-  contact@sparserest.com
-</a>
+                href="mailto:contact@sparserest.com"
+                style={{ color: "#ffffff" }}
+                className="mt-7 inline-flex items-center justify-center rounded-full bg-[#111111] px-6 py-3 text-sm font-medium transition-transform hover:-translate-y-0.5"
+              >
+                contact@sparserest.com
+              </a>
             </div>
 
           </div>
@@ -245,12 +226,12 @@ export default function AboutPage() {
 
             <div className="flex items-center gap-6">
 
-              <a
+              <Link
                 href="/"
                 className="transition-colors hover:text-[#111111]"
               >
                 Home
-              </a>
+              </Link>
 
               <a
                 href="/about"
