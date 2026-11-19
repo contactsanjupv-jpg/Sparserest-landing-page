@@ -57,6 +57,19 @@ button {
   margin-bottom: 18px;
 }
 
+h1 {
+  display: block;
+  line-height: 1.0 !important;
+  letter-spacing: -0.055em;
+  margin: 0;
+}
+
+h1 br {
+  display: block;
+  content: "";
+  margin-bottom: 0.08em;
+}
+
 /* =========================================================
    NAVBAR
    ========================================================= */

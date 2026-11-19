@@ -136,11 +136,11 @@ export default function Home() {
             <span className="hero-eyebrow">SOFTWARE AND TECHNOLOGY</span>
 
             <h1>
-              Ideas into
-              <br />
-              working
-              <br />
-              software
+              Building
+            <br />
+              intelligence for
+            <br />
+              the physical world
             </h1>
 
             <p>
